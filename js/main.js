@@ -71,7 +71,7 @@
                 }()
             );
 
-            const cpdCovid       = new Factor(name='covid',    tf.tensor([[0.5],[0.5]]));
+            const cpdCovid       = new Factor(name='covid',    tf.tensor([[0.2],[0.8]]));
 
             const cpdCough       = new Factor(name='covid-cough',                tf.tensor([[0.50, 0.31  ], [0.50, 0.69  ]]));
             const cpdHeadache    = new Factor(name='covid-headache',             tf.tensor([[0.50, 0.13  ], [0.50, 0.87  ]]));
@@ -84,7 +84,7 @@
             const cpdSputum      = new Factor(name='covid-sputum_production',    tf.tensor([[0.50, 0.67  ], [0.50, 0.33  ]]));
 
             // console.log(nodes[0])
-            const network = new FactorGraph(nodes[0], false,true);
+            const network = new FactorGraph(nodes[0], false,false);
 
             network.append('covid', cpdCovid);
 
