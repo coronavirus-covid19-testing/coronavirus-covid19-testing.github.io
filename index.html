@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Covid-19Test</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+
+	<link rel="stylesheet" type="text/css" href="css/radio.css">
+</head>
+<body>
+
+
+	<div class="container-contact100">
+
+		<div class="wrap-contact100">
+			<form class="contact100-form validate-form" onSubmit="console.log('alsdkfjasdf')">
+				<span class="contact100-form-title">
+					Covid-19 Test
+				</span>
+
+				<div class="wrap-input100 validate-input" data-validate="Please enter your name">
+					<input class="input100" type="text" name="name" placeholder="Full Name">
+					<span class="focus-input100"></span>
+				</div>
+
+				<div class="wrap-input100 validate-input" data-validate = "Please enter email: e@a.x">
+					<input class="input100" type="text" name="email" placeholder="Email">
+					<span class="focus-input100"></span>
+				</div>
+
+				<span class="contact100-form-heading">
+					Are you a smoker?:
+				</span>
+				<section id="sel">
+
+				<div>
+				<input type="radio" class="selectionBtn" name="smoker" id="smoker-no" value="0"><label class="contract100-input-lable" for="smoker-no">None
+
+				<p>I never touched it in my life</p>
+
+				</label>
+				</div>
+
+				<!-- <div>
+				<input type="radio" class="selectionBtn" name="smoker" id="smoker-left" value="1" checked><label class="contract100-input-lable" for="smoker-left">Not Currently
+				<p>I left a while ago</p>
+				</label>
+				</div> -->
+				<div>
+				<input type="radio" class="selectionBtn" name="smoker" id="smoker-yes" value="1"><label class="contract100-input-lable" for="smoker-yes">Yes</label>
+				</div>
+				</section>
+
+
+
+				
+				<span class="contact100-form-heading">
+					Cough:
+				</span>
+				<section >
+
+				<div>
+				<input type="radio" class="selectionBtn" name="cough" id="cough-none" value="0"><label class="contract100-input-lable" for="cough-none">None</label>
+				</div>
+
+				<div>
+				<input type="radio" class="selectionBtn" name="cough" id="cough-mild" value="1" checked><label class="contract100-input-lable" for="cough-mild">Mild</label>
+				</div>
+				<!-- <div>
+				<input type="radio" class="selectionBtn" name="cough" id="cough-severe" value="2"><label class="contract100-input-lable" for="cough-severe">Severe</label>
+				</div> -->
+				</section>
+
+				<span class="contact100-form-heading">
+					Fever:
+				</span>
+				<section >
+					<div>
+						<input type="radio" name="fever" id="fever-below99" value="0" checked><label  class="contract100-input-lable" for="fever-below99">below 99&#176;F</label>
+					</div>
+					<div>
+						<input type="radio" name="fever" id="fever-above99" value="1"><label  class="contract100-input-lable" for="fever-above99">above 99&#176;F</label>
+					</div>
+				</section>
+			
+				<span class="contact100-form-heading">
+					Headache:
+				</span>
+				<section >
+					<div>
+						<input type="radio" name="headache" id="headache-none" value="0" checked><label  class="contract100-input-lable" for="headache-none">None</label>
+					</div>
+					<div>
+						<input type="radio" name="headache" id="headache-mild" value="1" checked><label  class="contract100-input-lable" for="headache-mild">Yes</label>
+					</div>
+					<!-- <div>
+						<input type="radio" name="headache" id="headache-severe" value="2"><label  class="contract100-input-lable" for="headache-severe">Severe</label>
+					</div> -->
+				</section>
+
+				<span class="contact100-form-heading">
+					Fatigue:
+				</span>
+				<section >
+					<div>
+						<input type="radio" name="fatigue" id="fatigue-none" value="0" checked><label  class="contract100-input-lable" for="fatigue-none">None</label>
+					</div>
+					<div>
+						<input type="radio" name="fatigue" id="fatigue-mild" value="1" checked><label  class="contract100-input-lable" for="fatigue-mild">Yes</label>
+					</div>
+					<!-- <div>
+						<input type="radio" name="fatigue" id="fatigue-severe" value="2"><label  class="contract100-input-lable" for="fatigue-severe">Severe</label>
+					</div> -->
+				</section>
+
+				<span class="contact100-form-heading">
+					Difficulty breathing:
+				</span>
+				<section >
+					<div>
+						<input type="radio" name="db" id="db-no" value="0" checked><label  class="contract100-input-lable" for="db-no">No</label>
+					</div>
+					<div>
+						<input type="radio" name="db" id="db-yes" value="1"><label  class="contract100-input-lable" for="db-yes">Yes</label>
+					</div>
+				</section>
+
+				<span class="contact100-form-heading">
+					Anything else you would like to tell us?
+				</span>
+					<div class="wrap-input100 validate-input" data-validate = "Please enter your message">
+					<textarea class="input100" name="message" placeholder="Your Message"></textarea>
+					<span class="focus-input100"></span>
+				</div>
+
+
+				<div id="success" style="display: none;">
+					<span class="contact100-form-heading">
+						Congratulations!, you don't have to worry about!
+					</span>
+				</div>
+				<div id="fail" style="display:none;">
+					<span class="contact100-form-heading">
+						We believe that you should consult with your doctor or you can call on this helpline number +91-11-23978046
+					</span>
+				</div>
+
+				<div class="container-contact100-form-btn">
+					<button class="contact100-form-btn">
+						Evaluate
+					</button>
+				</div>
+
+			</form>
+
+			<!-- <div class="contact100-more">
+				Contact our 24/7 call center: <span class="contact100-more-highlight">+001 345 6889</span>
+			</div> -->
+		</div>
+	</div>
+
+
+
+	<div id="dropDownSelect1"></div>
+
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKFWBqlKAGCeS1rMVoaNlwyayu0e0YRes"></script>
+	<script src="js/map-custom.js"></script> -->
+<!--===============================================================================================-->
+	<script src="js/dependency/nd.min.js"></script>
+	<script src="js/dependency/tf.min.js"></script>
+	<script src="js/dependency/lodash.js"></script>
+	<script src="js/dependency/utils.js"></script>
+
+<!--===============================================================================================-->
+
+	<script src="js/sumProd.js"></script>
+	<script src="js/main.js"></script>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<!-- <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script> -->
+
+</body>
+</html>
