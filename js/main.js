@@ -77,17 +77,17 @@
                 }()
             );
 
-            const cpdCovid       = new Factor(name='covid',    tf.tensor([[0.000],[0.000]]));
+            const cpdCovid       = new Factor(name='Mcovid',    tf.tensor([[0.90],[0.10]]));
 
-            const cpdCough       = new Factor(name='covid-cough',                tf.tensor([[0.50, 0.31  ], [0.50, 0.69  ]]));
-            const cpdHeadache    = new Factor(name='covid-headache',             tf.tensor([[0.50, 0.13  ], [0.50, 0.87  ]]));
-            const cpdFatigue     = new Factor(name='covid-fatigue',              tf.tensor([[0.50, 0.40  ], [0.50, 0.60  ]]));
-            const cpdFever       = new Factor(name='covid-fever',                tf.tensor([[0.50, 0.11  ], [0.50, 0.89  ]]));
-            const cpdSmoker      = new Factor(name='covid-smoker',               tf.tensor([[0.50, 0.78  ], [0.50, 0.22  ]]));
-            const cpdBreathing   = new Factor(name='covid-difficulty_breathing', tf.tensor([[0.50, 0.813 ], [0.50, 0.187 ]]));
-            const cpdSoreThroat  = new Factor(name='covid-sore_throat',          tf.tensor([[0.50, 0.86  ], [0.50, 0.14  ]]));
-            const cpdAsthema     = new Factor(name='covid-asthema',              tf.tensor([[0.50, 0.60  ], [0.50, 0.40  ]]));
-            const cpdSputum      = new Factor(name='covid-sputum_production',    tf.tensor([[0.50, 0.67  ], [0.50, 0.33  ]]));
+            const cpdCough       = new Factor(name='covid-cough',                tf.tensor([[0.50, 0.50*1 + 1*0.69   ], [ 0.50*1 + 0*0.31 , 0.31  ]]));
+            const cpdHeadache    = new Factor(name='covid-headache',             tf.tensor([[0.50, 0.50*1 + 1*0.87   ], [ 0.50*1 + 0*0.13 , 0.13  ]]));
+            const cpdFatigue     = new Factor(name='covid-fatigue',              tf.tensor([[0.50, 0.50*1 + 1*0.60   ], [ 0.50*1 + 0*0.40 , 0.40  ]]));
+            const cpdFever       = new Factor(name='covid-fever',                tf.tensor([[0.80, 0.50*1 + 1*0.89   ], [ 0.20*1 + 0*0.11 , 0.11  ]]));
+            const cpdSmoker      = new Factor(name='covid-smoker',               tf.tensor([[0.50, 0.50*1 + 1*0.22   ], [ 0.50*1 + 0*0.78 , 0.78  ]]));
+            const cpdBreathing   = new Factor(name='covid-difficulty_breathing', tf.tensor([[0.50, 0.50*1 + 1*0.187  ], [ 0.50*1 + 0*0.813,  0.813 ]]));
+            const cpdSoreThroat  = new Factor(name='covid-sore_throat',          tf.tensor([[0.50, 0.50*1 + 1*0.14   ], [ 0.50*1 + 0*0.86 , 0.86  ]]));
+            const cpdAsthema     = new Factor(name='covid-asthema',              tf.tensor([[0.50, 0.50*1 + 1*0.40   ], [ 0.50*1 + 0*0.60 , 0.60  ]]));
+            const cpdSputum      = new Factor(name='covid-sputum_production',    tf.tensor([[0.50, 0.50*1 + 1*0.33   ], [ 0.50*1 + 0*0.67 , 0.67  ]]));
 
             // console.log(nodes[0])
             const network = new FactorGraph(nodes[0], false,false);
@@ -124,6 +124,8 @@
 
             network.computeMarginals()
 
+            console.log("before: ", network.exportMarginals()['covid'].print())
+
 
 
             network.observe(['smoker', 'cough', 'fever', 'headache', 'fatigue', 'difficulty_breathing', 'sore_throat', 'asthema', 'sputum_production'], 
@@ -148,7 +150,7 @@
 
                     
 
-                    if (marginals['covid'].flatten().arraySync()[0] > 0.5){
+                    if (marginals['covid'].flatten().arraySync()[1] > 0.5){
 
                         fail.style.display="initial"
                         success.style.display="none"

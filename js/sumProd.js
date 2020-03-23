@@ -382,7 +382,7 @@ function FactorGraph(firstNode=NaN, silent=false, debug=false){
 
         return sum;
     }
-    this.computeMarginals = function(maxItrs=10, tolerance=1e-3, errorFunc){
+    this.computeMarginals = function(maxItrs=100, tolerance=1e-3, errorFunc){
         // belief propagation
 
         // for keeping track of the state
@@ -411,7 +411,7 @@ function FactorGraph(firstNode=NaN, silent=false, debug=false){
 
 
         // belief propagation
-        while( step < maxItrs && tolerance < marginalDiffs[marginalDiffs.length -1]){
+        while( (step < maxItrs) && (tolerance < marginalDiffs[marginalDiffs.length -1])){
             const lastMarginals = currMarginals;
             step += 1
             if (!this.silent){
@@ -451,10 +451,11 @@ function FactorGraph(firstNode=NaN, silent=false, debug=false){
             }
             if (1){
 
-                console.log(marginalDiffs[marginalDiffs.length -1]);
+                console.log( step+"<"+maxItrs+" && "+ marginalDiffs[marginalDiffs.length -1]+" < "+tolerance);
             }
         }
 
+        // console.log()
         // console.log(currMarginals);
 
         window.currMarginals = currMarginals;
