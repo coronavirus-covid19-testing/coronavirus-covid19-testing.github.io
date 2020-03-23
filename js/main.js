@@ -45,12 +45,18 @@
                 output = output + entry[0] + "=" + entry[1] + "\r";
             };
 
+
+            console.log("asjdlkfj: ",output)
             // var result = output.match('/(cough\d=\d)/g').match('/\d+/g')*1;
-            const coughVal = (output.match(/cough=\d/g))[0].match(/[\d]$/g)[0]*1
-            const feverVal = (output.match(/fever=\d/g))[0].match(/[\d]$/g)[0]*1
-            const headacheVal = (output.match(/headache=\d/g))[0].match(/[\d]$/g)[0]*1
-            const fatigueVal = (output.match(/fatigue=\d/g))[0].match(/[\d]$/g)[0]*1
-            const dbVal = (output.match(/db=\d/g))[0].match(/[\d]$/g)[0]*1
+            const smokerVal = (output.match(/smoker=\d/g))[0].match(/[\d]$/g)[0]*1 || 0;
+            const coughVal = (output.match(/cough=\d/g))[0].match(/[\d]$/g)[0]*1;
+            const feverVal = (output.match(/fever=\d/g))[0].match(/[\d]$/g)[0]*1;
+            const headacheVal = (output.match(/headache=\d/g))[0].match(/[\d]$/g)[0]*1;
+            const fatigueVal = (output.match(/fatigue=\d/g))[0].match(/[\d]$/g)[0]*1;
+            const dbVal = (output.match(/db=\d/g))[0].match(/[\d]$/g)[0]*1;
+            const asthemaVal = (output.match(/asthema=\d/g))[0].match(/[\d]$/g)[0]*1;
+            const sorethroatVal = (output.match(/sore_throat=\d/g))[0].match(/[\d]$/g)[0]*1;
+            const sputumVal = (output.match(/sputum=\d/g))[0].match(/[\d]$/g)[0]*1;
 
 
             // calculate the probability of covid given the evidence
@@ -71,7 +77,7 @@
                 }()
             );
 
-            const cpdCovid       = new Factor(name='covid',    tf.tensor([[0.2],[0.8]]));
+            const cpdCovid       = new Factor(name='covid',    tf.tensor([[0.000],[0.000]]));
 
             const cpdCough       = new Factor(name='covid-cough',                tf.tensor([[0.50, 0.31  ], [0.50, 0.69  ]]));
             const cpdHeadache    = new Factor(name='covid-headache',             tf.tensor([[0.50, 0.13  ], [0.50, 0.87  ]]));
@@ -120,7 +126,8 @@
 
 
 
-            network.observe(['cough', 'fever', 'headache', 'fatigue', 'difficulty_breathing'], [coughVal, feverVal, headacheVal, fatigueVal, fatigueVal, dbVal]).then(
+            network.observe(['smoker', 'cough', 'fever', 'headache', 'fatigue', 'difficulty_breathing', 'sore_throat', 'asthema', 'sputum_production'], 
+                            [smokerVal, coughVal, feverVal, headacheVal, fatigueVal, fatigueVal, dbVal, sorethroatVal, asthemaVal, sputumVal]).then(
                 ()=>{
 
                     console.log('after observe yes!')
