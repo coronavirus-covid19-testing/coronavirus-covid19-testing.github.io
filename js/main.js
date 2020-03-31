@@ -77,17 +77,18 @@
                 }()
             );
 
+            // const cpdCovid       = new Factor(name='Mcovid',    tf.tensor([[0.96],[0.04]]));
             const cpdCovid       = new Factor(name='Mcovid',    tf.tensor([[0.90],[0.10]]));
 
-            const cpdCough       = new Factor(name='covid-cough',                tf.tensor([[0.50, 0.50*1 + 1*0.69   ], [ 0.50*1 + 0*0.31 , 0.31  ]]));
-            const cpdHeadache    = new Factor(name='covid-headache',             tf.tensor([[0.50, 0.50*1 + 1*0.87   ], [ 0.50*1 + 0*0.13 , 0.13  ]]));
-            const cpdFatigue     = new Factor(name='covid-fatigue',              tf.tensor([[0.50, 0.50*1 + 1*0.60   ], [ 0.50*1 + 0*0.40 , 0.40  ]]));
-            const cpdFever       = new Factor(name='covid-fever',                tf.tensor([[0.80, 0.50*1 + 1*0.89   ], [ 0.20*1 + 0*0.11 , 0.11  ]]));
-            const cpdSmoker      = new Factor(name='covid-smoker',               tf.tensor([[0.50, 0.50*1 + 1*0.22   ], [ 0.50*1 + 0*0.78 , 0.78  ]]));
-            const cpdBreathing   = new Factor(name='covid-difficulty_breathing', tf.tensor([[0.50, 0.50*1 + 1*0.187  ], [ 0.50*1 + 0*0.813,  0.813 ]]));
-            const cpdSoreThroat  = new Factor(name='covid-sore_throat',          tf.tensor([[0.50, 0.50*1 + 1*0.14   ], [ 0.50*1 + 0*0.86 , 0.86  ]]));
-            const cpdAsthema     = new Factor(name='covid-asthema',              tf.tensor([[0.50, 0.50*1 + 1*0.40   ], [ 0.50*1 + 0*0.60 , 0.60  ]]));
-            const cpdSputum      = new Factor(name='covid-sputum_production',    tf.tensor([[0.50, 0.50*1 + 1*0.33   ], [ 0.50*1 + 0*0.67 , 0.67  ]]));
+            const cpdCough       = new Factor(name='covid-cough',                tf.tensor([[0.70, 0.30], [0.31 ,  0.69 ]]));
+            const cpdHeadache    = new Factor(name='covid-headache',             tf.tensor([[0.80, 0.20], [0.87 ,  0.13 ]]));
+            const cpdFatigue     = new Factor(name='covid-fatigue',              tf.tensor([[0.80, 0.20], [0.60 ,  0.40 ]]));
+            const cpdFever       = new Factor(name='covid-fever',                tf.tensor([[0.70, 0.30], [0.11 ,  0.89 ]]));
+            const cpdSmoker      = new Factor(name='covid-smoker',               tf.tensor([[0.72, 0.28], [0.78 ,  0.22 ]]));
+            const cpdBreathing   = new Factor(name='covid-difficulty_breathing', tf.tensor([[0.94, 0.06], [0.813,  0.187]]));
+            const cpdSoreThroat  = new Factor(name='covid-sore_throat',          tf.tensor([[0.92, 0.08], [0.86 ,  0.14 ]]));
+            const cpdAsthema     = new Factor(name='covid-asthema',              tf.tensor([[0.98, 0.02], [0.60 ,  0.40 ]]));
+            const cpdSputum      = new Factor(name='covid-sputum_production',    tf.tensor([[0.95, 0.05], [0.67 ,  0.33 ]]));
 
             // console.log(nodes[0])
             const network = new FactorGraph(nodes[0], false,false);
@@ -127,9 +128,33 @@
             console.log("before: ", network.exportMarginals()['covid'].print())
 
 
+            const nameArray =['smoker', 'cough', 'fever', 'headache', 'fatigue', 'difficulty_breathing', 'sore_throat', 'asthema', 'sputum_production'];
+            const valArray = [smokerVal, coughVal, feverVal, headacheVal, fatigueVal, dbVal, sorethroatVal, asthemaVal, sputumVal];
 
-            network.observe(['smoker', 'cough', 'fever', 'headache', 'fatigue', 'difficulty_breathing', 'sore_throat', 'asthema', 'sputum_production'], 
-                            [smokerVal, coughVal, feverVal, headacheVal, fatigueVal, fatigueVal, dbVal, sorethroatVal, asthemaVal, sputumVal]).then(
+
+            const onlyActiveName = [];
+            const onlyActiveVal = [];
+
+            for(let i=0;i< valArray.length;i++){
+
+                if (valArray[i] != 0){
+
+                    onlyActiveName.push(nameArray[i])
+                    onlyActiveVal.push(valArray[i])
+
+                }
+            }
+
+            network.computeMarginals();
+            const marginals = network.exportMarginals();
+
+            console.log('before covid probability: ');
+            marginals['covid'].print();
+
+            network.observe(nameArray, 
+                            valArray).then(
+            // network.observe(onlyActiveName, 
+            //                 onlyActiveVal).then(
                 ()=>{
 
                     console.log('after observe yes!')
@@ -164,7 +189,7 @@
                 }
             )
 
-            console.log(output, coughVal);
+            // console.log(output, coughVal);
         }
 
         // return check;

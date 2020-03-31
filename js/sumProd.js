@@ -328,16 +328,17 @@ function FactorGraph(firstNode=NaN, silent=false, debug=false){
 
             const factors = node.connections.filter((node) => {if (node instanceof Factor)return node;});
 
-            const factorArray = [];
-            for(let factor of factors)
-                factorArray.push(factor);
+            if (state >=node.size)
+                throw new Error("specified state must not exceed the node size");
 
-            // detechining all the connections between each factors and this node.
-            for (let i=0;i<factorArray.length;i++){
-                let factor = factorArray[i];
+            const factorArray = [];
+            for(let factor of factors){
+
+
+                // detechining all the connections between each factors and this node.
                 const deleteAxis = factor.connections.indexOf(node);
                 const deleteDims = tf.linspace(0, node.size-1, node.size).flatten().arraySync();
-                deleteDims.splice(state[j] -1, 1);
+                deleteDims.splice(state[j], 1);
             
                 const v = await tfDeleteAsync(factor.potential, deleteDims, deleteAxis);
                 factor.potential = tf.squeeze(v);
@@ -345,11 +346,10 @@ function FactorGraph(firstNode=NaN, silent=false, debug=false){
 
                 console.log('factor '+factor.name+' updated')
 
+                // detechining all the connections of this node, soo that they won't be able to pass message.
+                node.connections = [];
+
             }
-
-            // detechining all the connections of this node, soo that they won't be able to pass message.
-            node.connections = [];
-
         }
 
     }
@@ -381,6 +381,18 @@ function FactorGraph(firstNode=NaN, silent=false, debug=false){
         }
 
         return sum;
+    }
+
+
+    this.printMarginals = function(){
+        const marginals = this.exportMarginals();
+
+        for(let nodeName in marginals){
+        const currNode = marginals[nodeName];
+        
+        console.log(nodeName+": ")
+        currNode.print();
+        }
     }
     this.computeMarginals = function(maxItrs=100, tolerance=1e-3, errorFunc){
         // belief propagation
