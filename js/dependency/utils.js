@@ -993,7 +993,8 @@ function ndIndex(shape){
  * @description converts the nan values in the given tensor to a specified number
  */
 function tfNan2Num(tensor, number=0){
-    return tf.tensor(tensorMap(tensor.arraySync(), tensor.shape, (n)=>{if(isNaN(n)){return number;}return n;}).tensor);
+    // return tf.tensor(tensorMap(tensor.arraySync(), tensor.shape, (n)=>{if(isNaN(n)){return number;}return n;}).tensor);
+    return (tMap(tensor, (n)=>{if(isNaN(n)){return number;}return n;} ));
 }
 
 
@@ -1025,6 +1026,23 @@ function tensorMap(tensor, shape, func=(n,i, d)=>{/**console.log(n,i,d); */ retu
     }
 
     return {tensor: tensor,index: index}; // TODO: understand why we can't just return the tensor array. by using chrom dev tools
+}
+
+/**
+ * 
+ * @param {tf.tensor} tensor tf.tensor object
+ * @param {Function} func specify any function that you what to apply to each element of the tensor
+ * 
+ * @description given a tf.tensor, this function recusively applies the given function to each values of this tensor and returns the modified tf.tensor 
+ */
+function tMap(tensor, func = (val) =>{return val}){
+  const flattenTensor = tensor.flatten().arraySync();
+  const shape = tensor.shape;
+  
+  for(let i=0;i< flattenTensor.length;i++){
+    flattenTensor[i] = func(flattenTensor[i], index2Coords(i, shape));
+  }
+  return tf.tensor(flattenTensor).reshape(shape);
 }
 
 
@@ -1110,6 +1128,19 @@ async function tfDeleteAsync(inputTensor, dim=0, axis=0){
 
   return tf.booleanMaskAsync(inputTensor, tensorMask, axis) ;
 }
+
+function timeAdd( t1={h: 0, m: 2, s:4, ms:3}, t2={h:2, m:5, s:3, ms:55} ){
+
+  const nms = (t1.ms+t2.ms) % 1000;
+  const s = (t1.s+t2.s+ ((nms)? 1 : 0)) % 60 ;
+  const m = (t1.m + t2.m + ((s)? 1: 0)) % 60;
+  const h = (t1.h + t2.h + ((m)? 1: 0)) % 24;
+
+  console.log(h+':'+m+':'+s+':'+nms);
+  return (h+':'+m+':'+s+':'+nms);
+
+}
+
 
 
 

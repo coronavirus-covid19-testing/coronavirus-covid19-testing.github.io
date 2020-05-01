@@ -35,19 +35,29 @@
         if (check){
 
             // const cough = document.getElementById('')
-            console.log("this form",k)
+            console.log("this form",k);
 
             var form = document.querySelector("form");
 
             var data = new FormData(form);
+
+            console.log(data)
+
+            const formData = {};
             var output = "";
             for (const entry of data) {
+                formData[entry[0]] = entry[1];
                 output = output + entry[0] + "=" + entry[1] + "\r";
             };
 
+            // console.log(formData)
 
-            console.log("asjdlkfj: ",output)
+
             // var result = output.match('/(cough\d=\d)/g').match('/\d+/g')*1;
+            // const ageVal = (output.match(/age=\d/g))[0].match(/[\d]$/g)[0]*1 || 0;
+            // const diabetesVal = (output.match(/diabetes=\d/g))[0].match(/[\d]$/g)[0]*1 || 0;
+            // const foreignTravelVal = (output.match(/foreign=\d/g))[0].match(/[\d]$/g)[0]*1 || 0;
+
             const smokerVal = (output.match(/smoker=\d/g))[0].match(/[\d]$/g)[0]*1 || 0;
             const coughVal = (output.match(/cough=\d/g))[0].match(/[\d]$/g)[0]*1;
             const feverVal = (output.match(/fever=\d/g))[0].match(/[\d]$/g)[0]*1;
@@ -56,81 +66,23 @@
             const dbVal = (output.match(/db=\d/g))[0].match(/[\d]$/g)[0]*1;
             const asthemaVal = (output.match(/asthema=\d/g))[0].match(/[\d]$/g)[0]*1;
             const sorethroatVal = (output.match(/sore_throat=\d/g))[0].match(/[\d]$/g)[0]*1;
-            const sputumVal = (output.match(/sputum=\d/g))[0].match(/[\d]$/g)[0]*1;
+            // const sputumVal = (output.match(/sputum=\d/g))[0].match(/[\d]$/g)[0]*1;
 
 
-            // calculate the probability of covid given the evidence
 
-            const nodeNames = ['covid', 'cough', 'headache', 'fatigue', 'fever', 'smoker', 'difficulty_breathing', 'sore_throat', 'asthema', 'sputum_production' ]
-            const dims =      [2,         2,          2,         2,        2,       2,                2,                  2,         2,             2,];
+            const network = model1();
 
-            const nodes = (
-                function(){
-
-                    const variableArray = [];
-                    for(let i=0;i< nodeNames.length;i++){
-                        variableArray.push(new Variable(nodeNames[i], dims[i]))
-                    }
-
-                    return variableArray;
-
-                }()
-            );
-
-            // const cpdCovid       = new Factor(name='Mcovid',    tf.tensor([[0.96],[0.04]]));
-            const cpdCovid       = new Factor(name='Mcovid',    tf.tensor([[0.90],[0.10]]));
-
-            const cpdCough       = new Factor(name='covid-cough',                tf.tensor([[0.70, 0.30], [0.31 ,  0.69 ]]));
-            const cpdHeadache    = new Factor(name='covid-headache',             tf.tensor([[0.80, 0.20], [0.87 ,  0.13 ]]));
-            const cpdFatigue     = new Factor(name='covid-fatigue',              tf.tensor([[0.80, 0.20], [0.60 ,  0.40 ]]));
-            const cpdFever       = new Factor(name='covid-fever',                tf.tensor([[0.70, 0.30], [0.11 ,  0.89 ]]));
-            const cpdSmoker      = new Factor(name='covid-smoker',               tf.tensor([[0.72, 0.28], [0.78 ,  0.22 ]]));
-            const cpdBreathing   = new Factor(name='covid-difficulty_breathing', tf.tensor([[0.94, 0.06], [0.813,  0.187]]));
-            const cpdSoreThroat  = new Factor(name='covid-sore_throat',          tf.tensor([[0.92, 0.08], [0.86 ,  0.14 ]]));
-            const cpdAsthema     = new Factor(name='covid-asthema',              tf.tensor([[0.98, 0.02], [0.60 ,  0.40 ]]));
-            const cpdSputum      = new Factor(name='covid-sputum_production',    tf.tensor([[0.95, 0.05], [0.67 ,  0.33 ]]));
-
-            // console.log(nodes[0])
-            const network = new FactorGraph(nodes[0], false,false);
-
-            network.append('covid', cpdCovid);
-
-            network.append('covid', cpdCough);
-            network.append('covid-cough', nodes[1]);
-
-            network.append('covid', cpdHeadache);
-            network.append('covid-headache', nodes[2]);
-
-            network.append('covid', cpdFatigue);
-            network.append('covid-fatigue', nodes[3]);
-
-            network.append('covid', cpdFever);
-            network.append('covid-fever', nodes[4]);
-
-            network.append('covid', cpdSmoker);
-            network.append('covid-smoker', nodes[5]);
-
-            network.append('covid', cpdBreathing);
-            network.append('covid-difficulty_breathing', nodes[6]);
-
-            network.append('covid', cpdSoreThroat);
-            network.append('covid-sore_throat', nodes[7]);
-
-            network.append('covid', cpdAsthema);
-            network.append('covid-asthema', nodes[8]);
-
-            network.append('covid', cpdSputum);
-            network.append('covid-sputum_production', nodes[9]);
-
-
-            network.computeMarginals()
 
             console.log("before: ", network.exportMarginals()['covid'].print())
 
 
-            const nameArray =['smoker', 'cough', 'fever', 'headache', 'fatigue', 'difficulty_breathing', 'sore_throat', 'asthema', 'sputum_production'];
-            const valArray = [smokerVal, coughVal, feverVal, headacheVal, fatigueVal, dbVal, sorethroatVal, asthemaVal, sputumVal];
+            // for model1
+            const nameArray =['smoker', 'cough', 'fever', 'headache', 'fatigue', 'difficulty_breathing', 'sore_throat', 'asthema', ];
+            const valArray = [smokerVal, coughVal, feverVal, headacheVal, fatigueVal, dbVal, sorethroatVal, asthemaVal, ];
 
+            // for model 2
+            // const nameArray =['age', 'diabetes', 'forign','smoker', 'cough', 'fever', 'headache', 'fatigue', 'difficulty_breathing', 'sore_throat', 'asthema', 'sputum_production'];
+            // const valArray = [ageVal, diabetesVal, foreignTravelVal, smokerVal, coughVal, feverVal, headacheVal, fatigueVal, dbVal, sorethroatVal, asthemaVal, sputumVal];
 
             const onlyActiveName = [];
             const onlyActiveVal = [];
@@ -145,6 +97,7 @@
                 }
             }
 
+            
             network.computeMarginals();
             const marginals = network.exportMarginals();
 
@@ -153,38 +106,51 @@
 
             network.observe(nameArray, 
                             valArray).then(
-            // network.observe(onlyActiveName, 
-            //                 onlyActiveVal).then(
                 ()=>{
 
                     console.log('after observe yes!')
                     network.computeMarginals();
-                    // const newMarginals = g.exportMarginals();
 
                     const marginals = network.exportMarginals();
 
                     console.log('covid probability: ');
                     marginals['covid'].print();
-                    // for( node in marginals){
-                    //     console.log('node: '+ node)
-                    //     marginals[node].print()
-                    // }
+
+                    const covidProb = marginals['covid'].flatten().arraySync()[1];
+
 
                     const success = document.getElementById('success')
                     const fail = document.getElementById('fail')
 
-                    
+                    const formElem = document.getElementById('form');
+                   
+                    const resultElem = document.getElementById('result');
 
+
+                    const candiNameElem = document.getElementById('candiName');
+                    const candiContactElem = document.getElementById('candiContact');
+                    const candiResultElem = document.getElementById('candiResult');
+
+
+                    const yesDialog = `with ${covidProb.toFixed(4)*100}% probability we strongly believe that you need to consult with your doctor immidiately`;
+                    const noDialog = `with ${(1-covidProb).toFixed(4)*100}% probability we believe that you don't have to worry about it at all. but if you are still not sure, then we recommend to consult with your doctor `;
+
+                    candiNameElem.innerHTML = formData.name;
+                    candiContactElem.innerHTML = formData.email;
+                    candiResultElem.innerHTML = (covidProb > 0.5)? yesDialog : noDialog;
+
+                    formElem.style.display='none';
+                    resultElem.style.display='initial';
                     if (marginals['covid'].flatten().arraySync()[1] > 0.5){
 
-                        fail.style.display="initial"
-                        success.style.display="none"
+                        fail.style.display="initial";
+                        success.style.display="none";
 
 
                     }else{
 
-                        success.style.display="initial"
-                        fail.style.display="none"
+                        success.style.display="initial";
+                        fail.style.display="none";
                     }
                 }
             )
@@ -241,3 +207,4 @@
     
 
 })(jQuery);
+
