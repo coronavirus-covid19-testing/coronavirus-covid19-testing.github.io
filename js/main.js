@@ -167,23 +167,23 @@
                         fail.style.display="none";
                     }
 
-                    firebase.database().ref('/users').once('value').then(function(snapshot) {
+                    // firebase.database().ref('/users').once('value').then(function(snapshot) {
 
 
-                        // var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
+                    //     // var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
 
-                        // ...
+                    //     // ...
 
-                        currUserId = 0;
-                        if(snapshot.val())
-                            currUserId = (snapshot.val().length);
-
-
-                        console.log('current user Id', currUserId);
-                        writeUserData(currUserId, userName,userEmail, symptoms, covidProb )
-                    });
+                    //     // currUserId = 0;
+                    //     // if(snapshot.val())
+                    //     //     currUserId = (snapshot.val().length);
 
 
+                    //     console.log('current user Id', currUserId);
+                    // });
+
+
+                        writeUserData(userName,userEmail, symptoms, covidProb )
 
                 }
             )

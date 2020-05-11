@@ -1,15 +1,20 @@
-// Your web app's Firebase configuration
-var firebaseConfig = {
-    authDomain: "fir-test-bcff5.firebaseapp.com",
-    databaseURL: "https://fir-test-bcff5.firebaseio.com",
-    projectId: "fir-test-bcff5",
-    storageBucket: "fir-test-bcff5.appspot.com",
-    messagingSenderId: "7724828234",
-    appId: "1:7724828234:web:60c4cfe5f53c710c98c8b3"
-};
+
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyA8MHYcKksTp5tWbUs8ZUtZI6ig83DqnFw",
+    authDomain: "ncovtester.firebaseapp.com",
+    databaseURL: "https://ncovtester.firebaseio.com",
+    projectId: "ncovtester",
+    storageBucket: "ncovtester.appspot.com",
+    messagingSenderId: "803762412638",
+    appId: "1:803762412638:web:07f09aa4e727c7ffb2a8cf",
+    measurementId: "G-T6TYD6N2PE"
+  };
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+//   firebase.analytics();
 
 // get elements
 const preObj = document.getElementById('object');
@@ -41,11 +46,11 @@ starCountRef.on('value', function(snapshot) {
 
 
 
-function writeUserData(userId, name, email, symptoms, covidProb) {
+function writeUserData( name, email, symptoms, covidProb) {
 
-    if(userId === null)throw new Error('invalid userId provided');
+    // if(userId === null)throw new Error('invalid userId provided');
 
-  firebase.database().ref('users/' + userId).set({
+  firebase.database().ref('users').push({
     username: name,
     email: email,
     symptoms: symptoms,
