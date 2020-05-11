@@ -50,7 +50,10 @@
                 output = output + entry[0] + "=" + entry[1] + "\r";
             };
 
-            // console.log(formData)
+            const userName = formData.name;
+            const userEmail = formData.email;
+
+            console.log(formData)
 
 
             // var result = output.match('/(cough\d=\d)/g').match('/\d+/g')*1;
@@ -75,10 +78,21 @@
 
             console.log("before: ", network.exportMarginals()['covid'].print())
 
-
             // for model1
             const nameArray =['smoker', 'cough', 'fever', 'headache', 'fatigue', 'difficulty_breathing', 'sore_throat', 'asthema', ];
             const valArray = [smokerVal, coughVal, feverVal, headacheVal, fatigueVal, dbVal, sorethroatVal, asthemaVal, ];
+
+            const symptoms ={
+                smoker: smokerVal, 
+                              cough: coughVal, 
+                              fever: feverVal, 
+                              headache: headacheVal,
+                              fatigue: fatigueVal, 
+                              difficulty_breathing: dbVal, 
+                              sore_throat: sorethroatVal, 
+                              asthema: asthemaVal, 
+                            };
+
 
             // for model 2
             // const nameArray =['age', 'diabetes', 'forign','smoker', 'cough', 'fever', 'headache', 'fatigue', 'difficulty_breathing', 'sore_throat', 'asthema', 'sputum_production'];
@@ -132,7 +146,7 @@
                     const candiResultElem = document.getElementById('candiResult');
 
 
-                    const yesDialog = `with ${covidProb.toFixed(4)*100}% probability we strongly believe that you need to consult with your doctor immidiately`;
+                    const yesDialog = `with ${covidProb.toFixed(4)*100}% probability we believe that you need to consult with your doctor immidiately`;
                     const noDialog = `with ${(1-covidProb).toFixed(4)*100}% probability we believe that you don't have to worry about it at all. but if you are still not sure, then we recommend to consult with your doctor `;
 
                     candiNameElem.innerHTML = formData.name;
@@ -152,6 +166,25 @@
                         success.style.display="initial";
                         fail.style.display="none";
                     }
+
+                    firebase.database().ref('/users').once('value').then(function(snapshot) {
+
+
+                        // var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
+
+                        // ...
+
+                        currUserId = 0;
+                        if(snapshot.val())
+                            currUserId = (snapshot.val().length);
+
+
+                        console.log('current user Id', currUserId);
+                        writeUserData(currUserId, userName,userEmail, symptoms, covidProb )
+                    });
+
+
+
                 }
             )
 
