@@ -1,2 +1,454 @@
-the site is currently down!
-Sorry for any inconvenience....
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Covid-19Test</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="images/icons/covidLogo.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+
+	<link rel="stylesheet" type="text/css" href="css/radio.css">
+
+	<style>
+		body{
+			margin: 0;
+			padding: 0;
+		}
+	</style>
+
+
+<style type="text/css">
+#overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #000;
+	filter:alpha(opacity=70);
+	-moz-opacity:0.7;
+	-khtml-opacity: 0.7;
+	opacity: 0.7;
+	z-index: 100;
+	display: none;
+}
+.cnt223 a{
+}
+.popup{
+	width: 100%;
+	height: 80%;
+	margin: 0 0;
+	display: none;
+	position: fixed;
+	z-index: 101;
+}
+.popup2{
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+	display: none;
+	position: fixed;
+	z-index: 101;
+	background: black;
+	opacity: .8;
+}
+.cnt223{
+	width: 80%;
+	min-height: 150px;
+	margin: 30px auto;
+	background: #f3f3f3;
+	position: relative;
+	z-index: 102;
+	padding: 15px 35px;
+	border-radius: 10px;
+	box-shadow: 0 2px 5px #100;
+
+}
+.cnt223 p{
+	clear: both;
+		color: #555555;
+		/* text-align: justify; */
+		font-size: 18px;
+}
+.cnt223 p a{
+	color: #d91900;
+	font-weight: bold;
+}
+.cnt223 .x{
+	float: right;
+	height: 35px;
+	left: 22px;
+	position: relative;
+	top: -25px;
+	width: 34px;
+}
+.cnt223 .x:hover{
+	cursor: pointer;
+}
+
+.close:hover{
+
+	background:  hsla(150, 75%, 50%, 1);
+
+}
+.close{
+
+	text-decoration: none;
+}
+</style>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js"></script>
+
+</head>
+<body>
+	
+
+<!-- dependency for using firebase realtime database -->
+<script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-database.js"></script>
+	<pre id="object"></pre>
+
+<script src="./js/firebaseSetup.js"></script>
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.8.2.js"></script>
+
+
+
+<script type='text/javascript'>
+$(function(){
+var overlay = $('<div id="overlay"></div>');
+overlay.show();
+overlay.appendTo(document.body);
+$('.popup').show();
+$('.close').click(function(){
+$('.popup').hide();
+overlay.appendTo(document.body).remove();
+return false;
+});
+
+
+ 
+
+$('.x').click(function(){
+$('.popup').hide();
+overlay.appendTo(document.body).remove();
+return false;
+});
+});
+</script>
+<div class='popup'>
+<div class='popup2' style="display: block;"></div>
+<div class='cnt223'>
+<h1>Disclaimer and Self Acknowledgement </h1>
+<div style="overflow: scroll; overflow-x: hidden; height: 400px; font-size: 20px">
+	The information contained in the content is not intended nor implied to be a substitute for professional medical advice, it is provided for educational purposes only.
+
+You assume full responsibility for how you choose to use this information.
+If you think that you are having a medical emergency, call 1075 or the number for the local emergency ambulance service NOW!
+
+And when in doubt, call your doctor NOW or go to the closest emergency department.The content has been reviewed and tested, but is not, and cannot be, error-free or be used in lieu of a physician’s advice and clinical evaluation. No natural language processing system or software can correctly interpret all words, phrases, or utterances that a person can speak or write. The acuity rating (call/concept prioritization index) is an estimate of complaint urgency and does not replace the judgment of a physician and a complete clinical evaluation. The clinical documentation support and clinical decision support are general guidelines that are not intended to establish a standard of care. The content relating to this triage engine and any other triage symptom checker cannot be error free in providing recommendations for the best level of care needed for a person with symptoms. The Content cannot and is not intended to provide a medical diagnosis and medical information is provided only for educational purposes. The information provided or resulting from use of the content should not be used as a substitute for the care and knowledge that a doctor can provide to you. The user bears all risks associated with the quality and the performance of the content.
+
+The user assumes all responsibility associated with using the content and for acts or omissions arising out of the use or misuse of the content
+
+
+<br/>
+<br/>
+<a href='' class='close' style="font-size: 21px; border-width: 10px; border: 2px solid hsla(150, 75%, 50%, 1); border-radius: 10px; padding: 0.5em; ">I Agree</a>
+<br/>
+<br/>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<div class="container-contact100">
+
+		<div class="wrap-contact100">
+
+			<div id="result" style="display: none;">
+        <span class="contact100-form-title">
+
+           Final Report 
+        </span>
+        <span>Name: </span><span id='candiName'></span>
+        <br/>
+        <br/>
+        <span>Contact: </span><span id='candiContact'></span>
+
+        <br/>
+        <br/>
+        <span>Result: </span> <span id='candiResult'></span>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+
+        <span>
+
+           <h2 style="margin: 0 auto;"> Disclaimer:</h2>
+		<br/>
+
+		Please note that the result which the platform produces is totally based on our bayesian network which again is not perfect . Irrespective of your result if you do not feel fine please consult a doctor . You are using this platform at your own risk.
+
+        </span>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<form class="contact100-form validate-form" id='form'>
+				<span class="contact100-form-title">
+					Covid-19 Test
+				</span>
+
+				<div class="wrap-input100 validate-input" data-validate="Please enter your name">
+					<input class="input100" type="text" name="name" placeholder="Full Name">
+					<span class="focus-input100"></span>
+				</div>
+
+				<div class="wrap-input100 validate-input" data-validate = "Please enter email: e@a.x">
+					<input class="input100" type="text" name="email" placeholder="Email">
+					<span class="focus-input100"></span>
+				</div>
+
+				<span class="contact100-form-heading">
+					Are you a smoker?:
+				</span>
+				<section id="sel">
+
+				<div>
+				<input type="radio" class="selectionBtn" name="smoker" id="smoker-no" value="0"><label class="contract100-input-lable" for="smoker-no">None
+
+				<p>I never touched it in my life</p>
+
+				</label>
+				</div>
+
+				<!-- <div>
+				<input type="radio" class="selectionBtn" name="smoker" id="smoker-left" value="1" ><label class="contract100-input-lable" for="smoker-left">Not Currently
+				<p>I left a while ago</p>
+				</label>
+				</div> -->
+				<div>
+				<input type="radio" class="selectionBtn" name="smoker" id="smoker-yes" value="1"><label class="contract100-input-lable" for="smoker-yes">Yes</label>
+				</div>
+				</section>
+
+
+
+				
+				<span class="contact100-form-heading">
+					Cough:
+				</span>
+				<section >
+
+				<div>
+				<input type="radio" class="selectionBtn" name="cough" id="cough-none" value="0"><label class="contract100-input-lable" for="cough-none">None</label>
+				</div>
+
+				<div>
+				<input type="radio" class="selectionBtn" name="cough" id="cough-mild" value="1"><label class="contract100-input-lable" for="cough-mild">Mild</label>
+				</div>
+				<!-- <div>
+				<input type="radio" class="selectionBtn" name="cough" id="cough-severe" value="2"><label class="contract100-input-lable" for="cough-severe">Severe</label>
+				</div> -->
+				</section>
+
+				<span class="contact100-form-heading">
+					Fever:
+				</span>
+				<section >
+					<div>
+						<input type="radio" name="fever" id="fever-below99" value="0" ><label  class="contract100-input-lable" for="fever-below99">below 99&#176;F</label>
+					</div>
+					<div>
+						<input type="radio" name="fever" id="fever-above99" value="1"><label  class="contract100-input-lable" for="fever-above99">above 99&#176;F</label>
+					</div>
+				</section>
+			
+				<span class="contact100-form-heading">
+					Headache:
+				</span>
+				<section >
+					<div>
+						<input type="radio" name="headache" id="headache-none" value="0" ><label  class="contract100-input-lable" for="headache-none">None</label>
+					</div>
+					<div>
+						<input type="radio" name="headache" id="headache-mild" value="1" ><label  class="contract100-input-lable" for="headache-mild">Yes</label>
+					</div>
+					<!-- <div>
+						<input type="radio" name="headache" id="headache-severe" value="2"><label  class="contract100-input-lable" for="headache-severe">Severe</label>
+					</div> -->
+				</section>
+
+				<span class="contact100-form-heading">
+					Fatigue:
+				</span>
+				<section >
+					<div>
+						<input type="radio" name="fatigue" id="fatigue-none" value="0" ><label  class="contract100-input-lable" for="fatigue-none">None</label>
+					</div>
+					<div>
+						<input type="radio" name="fatigue" id="fatigue-mild" value="1" ><label  class="contract100-input-lable" for="fatigue-mild">Yes</label>
+					</div>
+					<!-- <div>
+						<input type="radio" name="fatigue" id="fatigue-severe" value="2"><label  class="contract100-input-lable" for="fatigue-severe">Severe</label>
+					</div> -->
+				</section>
+
+				<span class="contact100-form-heading">
+					Difficulty breathing:
+				</span>
+				<section >
+					<div>
+						<input type="radio" name="db" id="db-no" value="0" ><label  class="contract100-input-lable" for="db-no">No</label>
+					</div>
+					<div>
+						<input type="radio" name="db" id="db-yes" value="1"><label  class="contract100-input-lable" for="db-yes">Yes</label>
+					</div>
+				</section>
+
+				<span class="contact100-form-heading">
+					Sore throat:
+				</span>
+				<section >
+					<div>
+						<input type="radio" name="sore_throat" id="sore_throat-no" value="0" ><label  class="contract100-input-lable" for="sore_throat-no">No</label>
+					</div>
+					<div>
+						<input type="radio" name="sore_throat" id="sore_throat-yes" value="1"><label  class="contract100-input-lable" for="sore_throat-yes">Yes</label>
+					</div>
+				</section>
+
+				<span class="contact100-form-heading">
+					Asthema:
+				</span>
+				<section >
+					<div>
+						<input type="radio" name="asthema" id="asthema-no" value="0" ><label  class="contract100-input-lable" for="asthema-no">No</label>
+					</div>
+					<div>
+						<input type="radio" name="asthema" id="asthema-yes" value="1"><label  class="contract100-input-lable" for="asthema-yes">Yes</label>
+					</div>
+				</section>
+
+				<span class="contact100-form-heading">
+					Anything else you would like to tell us?
+				</span>
+					<div class="wrap-input100 validate-input" data-validate = "Please enter your message">
+					<textarea class="input100" name="message" placeholder="Your Message">-</textarea>
+					<span class="focus-input100"></span>
+				</div>
+
+
+				<div id="success" style="display: none;">
+					<span class="contact100-form-heading">
+						Congratulations!, you don't have to worry about it!
+					</span>
+				</div>
+				<div id="fail" style="display:none;">
+					<span class="contact100-form-heading">
+						We believe that you should consult with your doctor or you can call on this helpline number +91-11-23978046
+					</span>
+				</div>
+
+				<div class="container-contact100-form-btn">
+					<button class="contact100-form-btn">
+						Evaluate
+					</button>
+				</div>
+
+			</form>
+
+			<!-- <div class="contact100-more">
+				Contact our 24/7 call center: <span class="contact100-more-highlight">+001 345 6889</span>
+			</div> -->
+		</div>
+	</div>
+
+
+
+	<div id="dropDownSelect1"></div>
+
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<!--===============================================================================================-->
+<!--===============================================================================================-->
+	<script src="js/dependency/nd.min.js"></script>
+	<script src="js/dependency/tf.min.js"></script>
+	<script src="js/dependency/lodash.js"></script>
+	<script src="js/dependency/utils.js"></script>
+
+<!--===============================================================================================-->
+
+	<script src="js/sumProd.js"></script>
+	<script src="js/models.js"></script>
+	<script src="js/main.js"></script>
+
+
+</body>
+</html>
